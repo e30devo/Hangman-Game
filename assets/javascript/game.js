@@ -14,41 +14,50 @@ var numberOfGuesses = 5;
 var wincrementer = 0;
 console.log(wincrementer);
 
-var wincrementerDiv = document.getElementsByClassName("wincrementer")[0];
-// <-- Randomly choose a string from array of subject words -->
-var wordInPlay = subjectWords[Math.floor(Math.random() * subjectWords.length)];
+function runGame () {
+
+    var wincrementerDiv = document.getElementsByClassName("wincrementer")[0];
+    // <-- Randomly choose a string from array of subject words -->
+    var wordInPlay = subjectWords[Math.floor(Math.random() * subjectWords.length)];
 
 
-var wordInPlayDiv = document.getElementsByClassName("wordInPlay")[0];
-
- 
-var letterSpan = document.getElementsByClassName("letters");
-
-
-// <-- Display "_ _ _ _ _ _" for wordInPlay -->
-    for (var i = 0; i < wordInPlay.length; i++) {
-        var span = document.createElement('span');
-        span.classList.add("letters");
-        span.textContent = "_";
-        span.style = 'font-size: 150%; margin: 5px;';
-        wordInPlayDiv.appendChild(span);
-    };
+    var wordInPlayDiv = document.getElementsByClassName("wordInPlay")[0];
     
-    document.onkeyup = function(event) {
-        var userGuess = event.key;
+    
+    var letterSpan = document.getElementsByClassName("letters");
+
+
+    // <-- Display "_ _ _ _ _ _" for wordInPlay -->
+        for (var i = 0; i < wordInPlay.length; i++) {
+            var span = document.createElement('span');
+            span.classList.add("letters");
+            span.textContent = "_";
+            span.style = 'font-size: 150%; margin: 5px;';
+            wordInPlayDiv.appendChild(span);
+        };
         
-        //Log user guess key to appropriate span
-        for (var j = 0; j < wordInPlay.length; j++) {
+        document.onkeyup = function(event) {
+            var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
             
-            if (userGuess === wordInPlay[j]) {
-                letterSpan[j].textContent = userGuess;
+            //Log user guess key to appropriate span
+            for (var j = 0; j < wordInPlay.length; j++) {
+                
+                if (userGuess === wordInPlay[j]) {
+                    letterSpan[j].textContent = userGuess;
+                } 
+                if (wordInPlayDiv.textContent === wordInPlay) {
+                    wincrementerDiv.textContent = ("Wins " + wincrementer ++);
+                    document.onkeyup = function(event) {
+                        wordInPlayDiv.innerHTML = "";
+                        runGame();
+                    }
+                 
+                };
             } 
-            if (wordInPlayDiv.textContent === wordInPlay) {
-                wincrementerDiv.textContent = ("Wins " + wincrementer + 1);
-            };
-        } 
-        console.log(wordInPlayDiv.textContent);
-    } //closer for onkeyup\
+            // console.log(wordInPlayDiv.textContent);
+        } //closer for onkeyup\
+    } //closer for function dec
+runGame();
 }); //closer for DOM loaded listener
 
 // <-- If all letters for word are displayed, show "YOU'VE REACHED TOP SPEED!" to user -->
