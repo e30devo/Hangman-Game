@@ -2,7 +2,7 @@
   document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
 
-var subjectWords = [ "BMW", "NISSAN", "CHEVROLET",
+var subjectWords = ["BMW", "CHEVROLET",
 "PORSCHE", "VOLKSWAGEN", "HONDA", "FERARRI", "PEUGEOT", "TOYOTA", "AUDI",];
 console.log(subjectWords);
 
@@ -14,12 +14,13 @@ var numberOfGuesses = 5;
 var wincrementer = 1;
 console.log(wincrementer);
 
+var wincrementerDiv = document.getElementsByClassName("wincrementer")[0];
+
 function runGame () {
 
-    var wincrementerDiv = document.getElementsByClassName("wincrementer")[0];
     // <-- Randomly choose a string from array of subject words -->
     var wordInPlay = subjectWords[Math.floor(Math.random() * subjectWords.length)];
-
+    console.log(wordInPlay);
 
     var wordInPlayDiv = document.getElementsByClassName("wordInPlay")[0];
     
@@ -41,20 +42,18 @@ function runGame () {
             
             //Log user guess key to appropriate span
             for (var j = 0; j < wordInPlay.length; j++) {
-                
                 if (userGuess === wordInPlay[j]) {
                     letterSpan[j].textContent = userGuess;
                 } 
                 if (wordInPlayDiv.textContent === wordInPlay) {
                     wincrementerDiv.textContent = ("Wins " + wincrementer ++);
+                    console.log(wincrementer);
                     document.onkeyup = function(event) {
-                        wordInPlayDiv.innerHTML = "";
+                        wordInPlayDiv.textContent = "";
                         runGame();
-                    }
-                 
+                    }                 
                 };
             } 
-            // console.log(wordInPlayDiv.textContent);
         } //closer for onkeyup\
     } //closer for function dec
 runGame();
