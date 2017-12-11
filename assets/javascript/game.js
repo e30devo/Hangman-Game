@@ -11,7 +11,7 @@ var numberOfGuesses = 5;
 // console.log(numberOfGuesses);
 
 // <-- or this... -->
-var wincrementer = 0;
+var wincrementer = 1;
 console.log(wincrementer);
 
 function runGame () {
