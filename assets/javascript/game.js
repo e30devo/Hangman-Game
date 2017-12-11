@@ -2,12 +2,12 @@
   document.addEventListener("DOMContentLoaded", function(event) {
     console.log("DOM fully loaded and parsed");
 
-var subjectWords = ["BMW", "CHEVROLET",
+var subjectWords = ["BMW", "NISSAN", "CHEVROLET",
 "PORSCHE", "VOLKSWAGEN", "HONDA", "FERARRI", "PEUGEOT", "TOYOTA", "AUDI",];
 console.log(subjectWords);
 
 // <-- if you cant tell what this does... -->
-var numberOfGuesses = 5;
+var numberOfGuesses = 10;
 // console.log(numberOfGuesses);
 
 // <-- or this... -->
@@ -20,7 +20,7 @@ function runGame () {
 
     // <-- Randomly choose a string from array of subject words -->
     var wordInPlay = subjectWords[Math.floor(Math.random() * subjectWords.length)];
-    console.log(wordInPlay);
+    console.log([...wordInPlay]);
 
     var wordInPlayDiv = document.getElementsByClassName("wordInPlay")[0];
     
@@ -44,25 +44,21 @@ function runGame () {
             for (var j = 0; j < wordInPlay.length; j++) {
                 if (userGuess === wordInPlay[j]) {
                     letterSpan[j].textContent = userGuess;
-                } 
+                }; 
+                 
+            };
                 if (wordInPlayDiv.textContent === wordInPlay) {
                     wincrementerDiv.textContent = ("Wins " + wincrementer ++);
-                    console.log(wincrementer);
+                    console.log(wincrementer);        
                     document.onkeyup = function(event) {
                         wordInPlayDiv.textContent = "";
                         runGame();
-                    }                 
-                };
-            } 
-        } //closer for onkeyup\
-    } //closer for function dec
+                    };         
+                } 
+        }; //closer for onkeyup\
+    }; //closer for function dec
 runGame();
 }); //closer for DOM loaded listener
-
-// <-- If all letters for word are displayed, show "YOU'VE REACHED TOP SPEED!" to user -->
-
-
-// <-- if guesses = 0 show "YOU'VE BEEN PULLED OVER, PAY FINE TO CONTINUE!" to user -->
 
 
 
