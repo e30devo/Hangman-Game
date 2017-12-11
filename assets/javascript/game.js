@@ -24,10 +24,10 @@ function runGame () {
 
     var wordInPlayDiv = document.getElementsByClassName("wordInPlay")[0];
     
-    
     var letterSpan = document.getElementsByClassName("letters");
 
-
+    var wrongGuessBinDiv = document.getElementsByClassName("wrongGuessBin")[0];
+    
     // <-- Display "_ _ _ _ _ _" for wordInPlay -->
         for (var i = 0; i < wordInPlay.length; i++) {
             var span = document.createElement('span');
@@ -44,17 +44,17 @@ function runGame () {
             for (var j = 0; j < wordInPlay.length; j++) {
                 if (userGuess === wordInPlay[j]) {
                     letterSpan[j].textContent = userGuess;
-                }; 
-                 
+                }                                
             };
+            
                 if (wordInPlayDiv.textContent === wordInPlay) {
                     wincrementerDiv.textContent = ("Wins " + wincrementer ++);
-                    console.log(wincrementer);        
+                    console.log(wincrementerDiv.textContent);        
                     document.onkeyup = function(event) {
                         wordInPlayDiv.textContent = "";
                         runGame();
                     };         
-                } 
+                }               
         }; //closer for onkeyup\
     }; //closer for function dec
 runGame();
