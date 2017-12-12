@@ -7,7 +7,7 @@ var subjectWords = ["BMW", "NISSAN", "CHEVROLET",
 console.log(subjectWords);
 
 // <-- if you cant tell what this does... -->
-var numberOfGuesses = 10;
+
 // console.log(numberOfGuesses);
 
 // <-- or this... -->
@@ -15,22 +15,27 @@ var wincrementer = 1;
 
 var wincrementerDiv = document.getElementsByClassName("wincrementer")[0];
 
+var numberOfGuessesDiv = document.getElementsByClassName("numberOfGuesses")[0];
+
 function runGame () {
 
-function reset () {
-    wordInPlayDiv.textContent = "";
-    numberOfGuesses = 10;
-    runGame();                    
-};  
+// function reset () {
+//     wordInPlayDiv.textContent = "";
+//     // numberOfGuesses = 10;
+//     runGame();                    
+// };  
     // <-- Randomly choose a string from array of subject words -->
     var wordInPlay = subjectWords[Math.floor(Math.random() * subjectWords.length)];
     console.log([...wordInPlay]);
+
+    var numberOfGuesses = 10;
 
     var wordInPlayDiv = document.getElementsByClassName("wordInPlay")[0];
     
     var letterSpan = document.getElementsByClassName("letters");
 
     var wrongGuessBinDiv = document.getElementsByClassName("wrongGuessBin")[0];
+    
     
     
     // <-- Display "_ _ _ _ _ _" for wordInPlay -->
@@ -41,11 +46,13 @@ function reset () {
             span.style = 'font-size: 150%; margin: 5px;';
             wordInPlayDiv.appendChild(span);
         };
+
         var wrongGuessBin = [];
+        numberOfGuessesDiv.textContent = "Number of guesses remaining: " + numberOfGuesses;
+
         document.onkeyup = function(event) {
             var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
-            var numberOfGuessesDiv = document.getElementsByClassName("numberOfGuesses")[0];
-            numberOfGuessesDiv.textContent = "Number of guesses remaining: " + numberOfGuesses;            
+            numberOfGuessesDiv.textContent = "Number of guesses remaining: " + numberOfGuesses;
             
             console.log(wrongGuessBin);
             //Log user guess key to appropriate span
@@ -58,21 +65,28 @@ function reset () {
                     wrongGuessBin.push(userGuess); 
                     wrongGuessBinDiv.innerHTML = wrongGuessBin;
                     numberOfGuesses--;
+                    numberOfGuessesDiv.textContent = "Number of guesses remaining: " + numberOfGuesses;
                     console.log(numberOfGuesses);
                 };
 
                 if (wordInPlayDiv.textContent === wordInPlay) {
                     wincrementerDiv.textContent = ("Wins: " + wincrementer ++ + "!");
+                    
                     wrongGuessBinDiv.textContent = "";
-                    console.log(wincrementerDiv.textContent);        
+                    console.log(wincrementerDiv.textContent);                            
                     document.onkeyup = function(event) {
-                      reset();
-                    };                            
+                    wordInPlayDiv.textContent = "";
+                    runGame();
+                    };                      
                 };
 
-                if (numberOfGuesses === -1) {
+                if (numberOfGuesses === 0) {
+                    wordInPlayDiv.textContent = "";
+                    numberOfGuesses.textContent = "Number of guesses remaining: " + 9;
+                    // reset();
                     wrongGuessBinDiv.textContent = "";
-                reset();
+                    runGame();
+                
                 };               
         }; //closer for onkeyup\
     }; //closer for function dec
