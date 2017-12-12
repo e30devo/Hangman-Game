@@ -18,12 +18,6 @@ var wincrementerDiv = document.getElementsByClassName("wincrementer")[0];
 var numberOfGuessesDiv = document.getElementsByClassName("numberOfGuesses")[0];
 
 function runGame () {
-
-// function reset () {
-//     wordInPlayDiv.textContent = "";
-//     // numberOfGuesses = 10;
-//     runGame();                    
-// };  
     // <-- Randomly choose a string from array of subject words -->
     var wordInPlay = subjectWords[Math.floor(Math.random() * subjectWords.length)];
     console.log([...wordInPlay]);
@@ -36,8 +30,6 @@ function runGame () {
 
     var wrongGuessBinDiv = document.getElementsByClassName("wrongGuessBin")[0];
     
-    
-    
     // <-- Display "_ _ _ _ _ _" for wordInPlay -->
         for (var i = 0; i < wordInPlay.length; i++) {
             var span = document.createElement('span');
@@ -48,6 +40,7 @@ function runGame () {
         };
 
         var wrongGuessBin = [];
+
         numberOfGuessesDiv.textContent = "Number of guesses remaining: " + numberOfGuesses;
 
         document.onkeyup = function(event) {
@@ -70,8 +63,7 @@ function runGame () {
                 };
 
                 if (wordInPlayDiv.textContent === wordInPlay) {
-                    wincrementerDiv.textContent = ("Wins: " + wincrementer ++ + "!");
-                    
+                    wincrementerDiv.textContent = ("Wins: " + wincrementer ++ + "!");                    
                     wrongGuessBinDiv.textContent = "";
                     console.log(wincrementerDiv.textContent);                            
                     document.onkeyup = function(event) {
@@ -82,8 +74,7 @@ function runGame () {
 
                 if (numberOfGuesses === 0) {
                     wordInPlayDiv.textContent = "";
-                    numberOfGuesses.textContent = "Number of guesses remaining: " + 9;
-                    // reset();
+                    numberOfGuesses.textContent = "Number of guesses remaining: " + 9;                    
                     wrongGuessBinDiv.textContent = "";
                     runGame();
                 
